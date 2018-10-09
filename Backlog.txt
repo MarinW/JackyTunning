@@ -1,0 +1,16 @@
+Backlog :
+-Menu de sélection des niveaux
+-Générations des niveaux à partir de fichier
+-Déplacement du héros
+-Attaques du héros
+-Défense du héros (bouclier)
+-Attaque à distance du héros
+-Interactivité avec les différentes cases (murs, pièges, cases magiques, trésors)
+-Générations de monstres aléatoirement
+-Attaques des monstres
+-Déplacement des monstres (fantôme à travers les murs)
+-Intelligence artificielle des monstres
+-Système de point de vie pour les monstres et le héros pour prendre en compte les attaques
+-Morts des monstres et du héros à 0 points de vie
+-Menu de "game over" avec possibilité de rejouer, de quitter ou de choisir un autre niveau
+-Menu de victoire avec possibilité de rejouer, de quitter ou de choisir un autre niveau
