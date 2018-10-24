@@ -1,27 +1,19 @@
 
-public class Avatar{
+public class Avatar extends Entite{
 	private int x;
 	private int y;
 	private String j;
 	private int PDV=10;
 	
 	public Avatar(int x,int y,String j) {
-		this.x=x;
-		this.y=y;
-		this.j=j;
+			super(x, y, j);
 	}
 	
 	public Avatar(String j) {
-		x=1;
-		y=1;
-		this.j=j;
-	}
+		super(j);
+		}
 	
-	public Avatar() {
-		x=1;
-		y=1;
-		j="Jacky";
-	}
+	
 	
 	public int getX() {
 		return x;
