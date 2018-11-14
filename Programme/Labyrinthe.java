@@ -63,6 +63,9 @@ public class Labyrinthe {
 		this.lab[x][y]=30;
 	}
 
+	public void initData(int x, int y) {
+		this.lab[x][y]=100;
+	}
 
 }
 

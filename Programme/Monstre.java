@@ -1,89 +1,91 @@
 
 public class Monstre extends Entite{
-	private int x;
-	private int y;
-	private int PDV=5;
-
-	public Monstre(int x,int y, String j) {
+	public Monstre(int x,int y,String j) {
 		super(x, y, j);
 	}
 
-	public int getX() {
-		return x;
+	public Monstre(String j) {
+		super(j);
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void afficher() {
+		System.out.println(this.getJ()+"("+this.getX()+","+this.getY()+")");
 	}
 
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getPDV() {
-		return PDV;
-	}
-
-	public void setPDV(int pDV) {
-		PDV = pDV;
-	}
-
-	public void deplacement(String S,int [][] Lab) {
-		S.toUpperCase();
-		if(S.equals("B")) {
-			if(Lab[x+1][y]==1) {
+	public void deplacement(String S,int [][] Lab, LabyrintheGraph fenetre) {
+		if(S.equals("D")) {
+			if(Lab[this.getX()+1][this.getY()]==1 || Lab[this.getX()+1][this.getY()]==2) {
+				//System.out.println("Il y a un mur impossible de passer !");	
 			}
 			else {
-				x+=1;
+				this.setX(this.getX()+1);
+				Lab[this.getX()-1][this.getY()]=0; // case vide
+				Lab[this.getX()][this.getY()]=20;	//case heros
+				fenetre.repaint((this.getX()-1)*40, this.getY()*40+22, 40, 40);
+			}
+		}
+		else if(S.equals("G")) {
+			if(Lab[this.getX()-1][this.getY()]==1 || Lab[this.getX()-1][this.getY()]==2) {
+				//System.out.println("Il y a un mur impossible de passer !");	
+			}
+			else {
+				this.setX(this.getX()-1);
+				Lab[this.getX()+1][this.getY()]=0; // case vide
+				Lab[this.getX()][this.getY()]=20;	//case heros
+				fenetre.repaint((this.getX()+1)*40, this.getY()*40+22, 40, 40);
 			}
 		}
 		else if(S.equals("H")) {
-			if(Lab[x-1][y]==1) {
+			if(Lab[this.getX()][this.getY()-1]==1 || Lab[this.getX()][this.getY()-1]==2) {
+				//System.out.println("Il y a un mur impossible de passer !");	
 			}
 			else {
-				x-=1;}
+				this.setY(this.getY()-1);
+				Lab[this.getX()][this.getY()+1]=0; // case vide
+				Lab[this.getX()][this.getY()]=20;	//case heros
+				fenetre.repaint((this.getX())*40, (this.getY()+1)*40+22, 40, 40);
+			}
 		}
-		else if(S.equals("G")) {
-			if(Lab[x][y-1]==1) {
+		else if(S.equals("B")) {
+			if(Lab[this.getX()][this.getY()+1]==1 || Lab[this.getX()][this.getY()+1]==2) {
+				//System.out.println("Il y a un mur impossible de passer !");	
 			}
 			else {
-				y-=1;}
-		}
-		else if(S.equals("D")) {
-			if(Lab[x][y+1]==1) {
+				this.setY(this.getY()+1);
+				Lab[this.getX()][this.getY()-1]=0; // case vide
+				Lab[this.getX()][this.getY()]=20;	//case heros
+				fenetre.repaint((this.getX())*40, (this.getY()-1)*40+22, 40, 40);
 			}
-			else {
-				y+=1;}
 		}
 		else {
-
+			//System.out.println("Vous restez perplexe...");
 		}
+	}
+
+	public void Degat() {
+		this.setPDV(this.getPDV()-1);
 	}
 
 
 	public boolean[] detectionMur(int [][] Lab) {
 		boolean[] dirpos = {true, true, true, true};
-		if(Lab[x+1][y]==1) {
+		if(Lab[this.getX()+1][this.getY()]==1) {
 		}
 		else {
 			dirpos[0] = false; //Bas
 		}
-		if(Lab[x-1][y]==1) {
+		if(Lab[this.getX()-1][this.getY()]==1) {
 		}
 		else {
 			dirpos[1] = false; //Haut
 		}
-		if(Lab[x][y-1]==1) {
+		if(Lab[this.getX()][this.getY()-1]==1) {
 		}
 		else {
 			dirpos[2] = false; //Gauche
 		}
 
-		if(Lab[x][y+1]==1) {
+		if(Lab[this.getX()][this.getY()+1]==1) {
 		}
 		else {
 			dirpos[3] = false; //Droite
@@ -97,7 +99,7 @@ public class Monstre extends Entite{
 		if (dist<=0.20*Lab.length) {
 			for (int i = 0; i<dirpos.length ; i++) {
 				if (dirpos[i]==false) {
-					
+
 				}
 			}
 		}

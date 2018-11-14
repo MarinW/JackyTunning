@@ -60,6 +60,6 @@ abstract class Entite {
 	}
 	
 	
-	abstract void deplacement(String S,int [][] Lab);
+	abstract void deplacement(String S,int [][] Lab, LabyrintheGraph fenetre);
 	
 }

@@ -12,7 +12,7 @@ public class Principale {
 	static Avatar Jacky = new Avatar("Antoine"); 
 	static Fantome Test = new Fantome("test");
 	
-	static Labyrinthe lab = new Labyrinthe(2);
+	static Labyrinthe lab = new Labyrinthe(4);
 	static LabyrintheGraph fenetre = new LabyrintheGraph(lab);
 	
 	static BufferedImage  heros = null;
@@ -37,9 +37,12 @@ public class Principale {
 	private static void initilisation() throws IOException {
 
 		lab.initJoueur(Jacky.getX(), Jacky.getY());
-		Test.setX(10);
+		
+		Test.setX(16);
 		Test.setY(12);
 		lab.initFantome(Test.getX(), Test.getY());
+		
+		lab.initData(12, 13);
 
 		try {
 			File input1 = new File("Resources/herosBlanc.png");
@@ -62,7 +65,7 @@ public class Principale {
 		Jacky.deplacement(s,lab.getLab(),fenetre);
 		fenetre.getGraphics().drawImage(heros, Jacky.getX()*40, (Jacky.getY()*40)+22, 40, 40, null);
 		
-		if(Jacky.getX()==3 && Jacky.getY()==3) partieTerminee=true;
+		if(lab.getLab()[Jacky.getX()][Jacky.getY()]==100) partieTerminee=true;
 		
 	}
 
@@ -70,13 +73,10 @@ public class Principale {
 		
 		try {
 			Thread.sleep(1000); 
+			Test.deplacement(Test.deplacementInt(lab.getLab(), Jacky), lab.getLab(), fenetre);
 		}
 		catch(InterruptedException e) {
 			System.out.println(e.getMessage());
-		}
-		
-		Test.deplacement(Test.deplacementInt(lab.getLab(), Jacky), lab.getLab(), fenetre);
-		fenetre.getGraphics().drawImage(monstre, Test.getX()*40, (Test.getY()*40)+22, 40, 40, null);
-		
+		}	
 	}
 }

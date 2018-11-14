@@ -1,70 +1,87 @@
 
 public class Avatar extends Entite {
-	
+
 	public Avatar(int x,int y,String j) {
-			super(x, y, j);
+		super(x, y, j);
 	}
-	
+
 	public Avatar(String j) {
 		super(j);
-		}
-	
+	}
+
 	public void afficher() {
 		System.out.println(this.getJ()+"("+this.getX()+","+this.getY()+")");
 	}
 
 	public void deplacement(String S,int [][] Lab, LabyrintheGraph fenetre) {
-		if(S.equals("D")) {
-			if(Lab[this.getX()+1][this.getY()]==1 || Lab[this.getX()+1][this.getY()]==2) {
-				//System.out.println("Il y a un mur impossible de passer !");	
-			}
-			else {
+
+		switch(S) {
+
+		case "D":
+
+			switch(Lab[this.getX()+1][this.getY()]) {
+			case 2 : // contour
+				break;
+			case 1:
+				break;
+			default: // Sinon
 				this.setX(this.getX()+1);
-				Lab[this.getX()-1][this.getY()]=0; // case vide
-				Lab[this.getX()][this.getY()]=20;	//case heros
 				fenetre.repaint((this.getX()-1)*40, this.getY()*40+22, 40, 40);
+				break;
 			}
-		}
-		else if(S.equals("G")) {
-			if(Lab[this.getX()-1][this.getY()]==1 || Lab[this.getX()-1][this.getY()]==2) {
-				//System.out.println("Il y a un mur impossible de passer !");	
-			}
-			else {
+			break;
+
+		case "G":
+
+			switch(Lab[this.getX()-1][this.getY()]) {
+			case 2 : // contour
+				break;
+			case 1:
+				break;
+			default: // Sinon
 				this.setX(this.getX()-1);
-				Lab[this.getX()+1][this.getY()]=0; // case vide
-				Lab[this.getX()][this.getY()]=20;	//case heros
 				fenetre.repaint((this.getX()+1)*40, this.getY()*40+22, 40, 40);
-				}
-		}
-		else if(S.equals("H")) {
-			if(Lab[this.getX()][this.getY()-1]==1 || Lab[this.getX()][this.getY()-1]==2) {
-				//System.out.println("Il y a un mur impossible de passer !");	
+				break;
 			}
-			else {
+			break;
+
+		case "H":
+
+			switch(Lab[this.getX()][this.getY()-1]) {
+			case 2 : // contour
+				break;
+			case 1:
+				break;
+			default: // Sinon
 				this.setY(this.getY()-1);
-				Lab[this.getX()][this.getY()+1]=0; // case vide
-				Lab[this.getX()][this.getY()]=20;	//case heros
 				fenetre.repaint((this.getX())*40, (this.getY()+1)*40+22, 40, 40);
-				}
-		}
-		else if(S.equals("B")) {
-			if(Lab[this.getX()][this.getY()+1]==1 || Lab[this.getX()][this.getY()+1]==2) {
-				//System.out.println("Il y a un mur impossible de passer !");	
+				break;
 			}
-			else {
+
+			break;
+
+		case "B":
+
+			switch(Lab[this.getX()][this.getY()+1]) {
+			case 2 : // contour
+				break;
+			case 1:
+				break;
+			default: // Sinon
 				this.setY(this.getY()+1);
-				Lab[this.getX()][this.getY()-1]=0; // case vide
-				Lab[this.getX()][this.getY()]=20;	//case heros
 				fenetre.repaint((this.getX())*40, (this.getY()-1)*40+22, 40, 40);
-				}
-		}
-		else {
-			//System.out.println("Vous restez perplexe...");
+				break;
+			}
+
+			break;
+
+		default:
+			break;
 		}
 	}
 
 	public void Degat() {
 		this.setPDV(this.getPDV()-1);
 	}
-	
+
 }
