@@ -80,8 +80,35 @@ public class Avatar extends Entite {
 		}
 	}
 
-	public void Degat() {
-		this.setPDV(this.getPDV()-1);
-	}
+	public void Degat(String S, int [][] Lab, ArrayList<Entite> ArrayE) {
+		if (S.equals('A')) { //Dégâts sur la zone autour de rayon portee
+			int portee = 2;
+			int deg = 1; //quantité de points de vie enlevés grâce à l'attaque à chaque monstre touché.
+			for (int i=-portee ; i<=portee ; i++){
+				for (int j=-portee ; i<=portee ; i++) {
+					for (int e = 1 ; e<ArrayE.size() ; ){ //on démarre au 2e terme pour ne pas avoir l'avatar
+						if (this.getX()+i == ArrayE.get(e).getX() && this.getY()+j == ArrayE.get(e).getY()){
+							ArrayE.get(e).setPDV(ArrayE.get(e).getPDV()-deg);
+						}
+					}
+				}
+			}
+		}
+		else if (S.equals('E')) { //Degâts et contrôle du monstre sur lequel le héros va (manque le contrôle pour le moment)
+			int portee = 1;
+			int deg = 1; 
+			for (int i=-portee ; i<=portee ; i++){
+				for (int j=-portee ; i<=portee ; i++) {
+					for (int e = 1 ; e<ArrayE.size() ; ){ //on démarre au 2e terme pour ne pas avoir l'avatar
+						if (this.getX()+i == ArrayE.get(e).getX() && this.getY()+j == ArrayE.get(e).getY()){
+							ArrayE.get(e).setPDV(ArrayE.get(e).getPDV()-deg);
+							this.setPDV(this.getPDV()-deg);
+						}
+					}
+				}
+			}
+		}
+	} //Pour le contrôle, il faut ajouter une caractéristique deplacementPossible aux monstres. Elle serait égale au nombre de tours nécessaires avant de pouvoir bouger.
+	
 
 }
