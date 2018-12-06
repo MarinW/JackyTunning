@@ -1,3 +1,5 @@
+
+package Class;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -5,17 +7,22 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class LabyrintheGraph extends JFrame implements KeyListener {
+
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 7107649903833331682L;
+
+
 
 	public LabyrintheGraph(Labyrinthe lab){
 		super();
 		setLayout(new BorderLayout());
-		JLabel background=new JLabel(new ImageIcon("Resources/ciaBackground.png"));
-		add(background);
+		
 
 		build(lab);//On initialise notre fenêtre
 	}
@@ -34,7 +41,9 @@ public class LabyrintheGraph extends JFrame implements KeyListener {
 	}
 
 	public void dessinerLab(Labyrinthe lab) {
-
+		
+		String adressedufichier = System.getProperty("user.dir") + "/" + "Programme" + "/" + "Ressources" + "/";
+		
 		BufferedImage  obstacle = null;
 
 		BufferedImage  contourTop = null; //contour alligner haut bas
@@ -54,40 +63,40 @@ public class LabyrintheGraph extends JFrame implements KeyListener {
 
 		try {
 
-			File input1 = new File("Resources/obstacle.png");
+			File input1 = new File(adressedufichier + "obstacle.png");
 			obstacle = ImageIO.read(input1);
 
-			File input2 = new File("Resources/murH.png");
+			File input2 = new File(adressedufichier + "murH.png");
 			contourTop = ImageIO.read(input2);
 
-			File input3 = new File("Resources/murB.png");
+			File input3 = new File(adressedufichier + "murB.png");
 			contourBot = ImageIO.read(input3);
 
-			File input4 = new File("Resources/coinHG.png");
+			File input4 = new File(adressedufichier + "coinHG.png");
 			contourHG = ImageIO.read(input4);
 
-			File input5 = new File("Resources/coinBG.png");
+			File input5 = new File(adressedufichier + "coinBG.png");
 			contourBG = ImageIO.read(input5);
 
-			File input6 = new File("Resources/coinHD.png");
+			File input6 = new File(adressedufichier + "coinHD.png");
 			contourHD = ImageIO.read(input6);
 
-			File input7 = new File("Resources/coinBD.png");
+			File input7 = new File(adressedufichier + "coinBD.png");
 			contourBD = ImageIO.read(input7);
 
-			File input8 = new File("Resources/herosBlanc.png");
+			File input8 = new File(adressedufichier + "herosBlanc.png");
 			heros = ImageIO.read(input8);
 
-			File input9 = new File("Resources/murG.png");
+			File input9 = new File(adressedufichier + "murG.png");
 			contourG = ImageIO.read(input9);
 
-			File input10 = new File("Resources/murD.png");
+			File input10 = new File(adressedufichier + "murD.png");
 			contourD = ImageIO.read(input10);
 			
-			File input11 = new File("Resources/monstre.png");
+			File input11 = new File(adressedufichier + "monstre.png");
 			fantome = ImageIO.read(input11);
 			
-			File input12 = new File("Resources/data.png");
+			File input12 = new File(adressedufichier + "data.png");
 			data = ImageIO.read(input12);
 
 		} catch (IOException ie) {
@@ -125,6 +134,9 @@ public class LabyrintheGraph extends JFrame implements KeyListener {
 				} 
 			}
 		}
+		
+		
+		
 	}
 
 
@@ -147,6 +159,12 @@ public class LabyrintheGraph extends JFrame implements KeyListener {
 				break;
 			case KeyEvent.VK_DOWN: 
 				Principale.deplacerJoueur("B");
+				break;
+			case KeyEvent.VK_A:
+				Principale.degatsJoueur("A");
+				break;
+			case KeyEvent.VK_E:
+				Principale.degatsJoueur("E");
 				break;
 			}
 		}
