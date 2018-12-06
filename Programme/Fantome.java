@@ -1,12 +1,16 @@
 
+package Class;
+
 public class Fantome extends Entite{
 
 	public Fantome(int x,int y,String j) {
 		super(x, y, j);
+		setPDV(5);
 	}
 
 	public Fantome(String j) {
 		super(j);
+		setPDV(5);
 	}
 
 	public void afficher() {
@@ -14,87 +18,89 @@ public class Fantome extends Entite{
 	}
 
 	public void deplacement(String S,int [][] Lab, LabyrintheGraph fenetre) {
-		
-		fenetre.repaint((this.getX())*40, this.getY()*40+22, 40, 40); // enlever fantome
-		
-		int Xold = this.getX(); //ancienne coordonnées
-		int Yold = this.getY();
-		
-		switch(S) {
-		
-		case "D":
-			
-			switch(Lab[this.getX()+1][this.getY()]) {
-			case 2 : // contour
+		if (this.getDeplacementpossible() > 0) this.setDeplacementpossible(this.getDeplacementpossible() - 1);
+		else {
+			fenetre.repaint((this.getX())*40, this.getY()*40+22, 40, 40); // enlever fantome
+
+			int Xold = this.getX(); //ancienne coordonnées
+			int Yold = this.getY();
+
+			switch(S) {
+
+			case "D":
+
+				switch(Lab[this.getX()+1][this.getY()]) {
+				case 2 : // contour
+					break;
+				case 100:
+					break;
+				default: // Sinon
+					this.setX(this.getX()+1);
+					break;
+				}
+
 				break;
-			case 100:
+
+			case "G":
+
+				switch(Lab[this.getX()-1][this.getY()]) {
+				case 2 : // contour
+					break;
+				case 100:
+					break;
+				default: // Sinon
+					this.setX(this.getX()-1);
+					break;
+				}
+
 				break;
-			default: // Sinon
-				this.setX(this.getX()+1);
+
+			case "H":
+
+				switch(Lab[this.getX()][this.getY()-1]) {
+				case 2 : // contour
+					break;
+				case 100:
+					break;
+				default: // Sinon
+					this.setY(this.getY()-1);
+					break;
+				}
+
+				break;
+
+			case "B":
+
+				switch(Lab[this.getX()][this.getY()+1]) {
+				case 2 : // contour
+					break;
+				case 100:
+					break;
+				default: // Sinon
+					this.setY(this.getY()+1);
+					break;
+				}
+
+				break;
+
+			default:
 				break;
 			}
-			
-			break;
-			
-		case "G":
-			
-			switch(Lab[this.getX()-1][this.getY()]) {
-			case 2 : // contour
-				break;
-			case 100:
-				break;
-			default: // Sinon
-				this.setX(this.getX()-1);
-				break;
-			}
-			
-			break;
-			
-		case "H":
-			
-			switch(Lab[this.getX()][this.getY()-1]) {
-			case 2 : // contour
-				break;
-			case 100:
-				break;
-			default: // Sinon
-				this.setY(this.getY()-1);
-				break;
-			}
-			
-			break;
-			
-		case "B":
-			
-			switch(Lab[this.getX()][this.getY()+1]) {
-			case 2 : // contour
-				break;
-			case 100:
-				break;
-			default: // Sinon
-				this.setY(this.getY()+1);
-				break;
-			}
-			
-			break;
-			
-		default:
-			break;
+
+
+			fenetre.getGraphics().drawImage(Principale.monstre, this.getX()*40, (this.getY()*40)+22, 40, 40, null);
+
+			if (Lab[Xold][Yold]==1) {
+				try {
+					Thread.sleep(0, 1);
+					fenetre.getGraphics().drawImage(Principale.obstacle, Xold*40, (Yold*40)+22, 40, 40, null);
+				}
+				catch(Exception e) {
+					System.out.println(e);
+				}
+
+			}	
 		}
-		
-		fenetre.getGraphics().drawImage(Principale.monstre, this.getX()*40, (this.getY()*40)+22, 40, 40, null);
-		
-		if (Lab[Xold][Yold]==1) {
-			try {
-				Thread.sleep(0, 1);
-				fenetre.getGraphics().drawImage(Principale.obstacle, Xold*40, (Yold*40)+22, 40, 40, null);
-			}
-			catch(Exception e) {
-				System.out.println(e);
-			}
-			
-		}	
-		
 	}
 
 	public void Degat() {
