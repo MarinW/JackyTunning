@@ -1,10 +1,13 @@
 
+package Class;
+
 abstract class Entite {
 
 	private int x;
 	private int y;
 	private String j;
 	private int PDV;
+	private int deplacementpossible = 0;
 			
 	public Entite(int x, int y, String j) {
 		this.x = x;
@@ -60,6 +63,21 @@ abstract class Entite {
 	}
 	
 	
+	public int getDeplacementpossible() {
+		return deplacementpossible;
+	}
+
+
+	public void setDeplacementpossible(int deplacementpossible) {
+		this.deplacementpossible = deplacementpossible;
+	}
+	
+	
 	abstract void deplacement(String S,int [][] Lab, LabyrintheGraph fenetre);
+
+
+	
+	
+	abstract String deplacementInt(int[][] Lab, Avatar A);
 	
 }
