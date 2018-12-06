@@ -1,33 +1,21 @@
+
 package Class;
 
 import java.io.*;
-import java.util.List;
-import java.util.Arrays;
-import java.lang.Object;
-
 
 public class GenerationLabyrintheTexte {
 
-	private int hauteur;
-	private int largeur;
-	int[][] lab;
+	public static void Generation(int dificulte, int hauteur, int largeur){
 
-	public GenerationLabyrintheTexte(int dificulte){
+		String adressedufichier = System.getProperty("user.dir") + "/" + "Programme" + "/" + "Ressources" + "/" + "LabyrintheTexte"; 
 
-		this.hauteur = 20;
-		this.largeur = 20 ;
-
-		String adressedufichier = System.getProperty("user.dir") + "/" + "Programme" + "/" + "Ressources" + "/" + "LabyrintheTexte"; //on met try si jamais il y a une exception 
-
-
-
-		try{
+		try{ //on met try si jamais il y a une exception 
 
 			PrintWriter writer = new PrintWriter(adressedufichier);
 
 			writer.println("22222222222222222222");
 
-			for (int i = 1; i < largeur - 1; i++){
+			for (int i = 1; i < hauteur - 1; i++){
 
 				writer.print("2");
 
@@ -58,7 +46,6 @@ public class GenerationLabyrintheTexte {
 			writer.print("22222222222222222222");
 
 			writer.close();
-
 
 		}
 
