@@ -1,12 +1,18 @@
 
+package Class;
+
+import java.util.ArrayList;
+
 public class Avatar extends Entite {
 
 	public Avatar(int x,int y,String j) {
 		super(x, y, j);
+		setPDV(10);
 	}
 
 	public Avatar(String j) {
 		super(j);
+		setPDV(10);
 	}
 
 	public void afficher() {
@@ -80,35 +86,45 @@ public class Avatar extends Entite {
 		}
 	}
 
-	public void Degat(String S, int [][] Lab, ArrayList<Entite> ArrayE) {
-		if (S.equals('A')) { //Dégâts sur la zone autour de rayon portee
+	public void degats(String S, int [][] Lab, ArrayList<Entite> ArrayE) {
+		if (S.equals("A")) { //DÃ©gÃ¢ts sur la zone autour de rayon portee
 			int portee = 2;
-			int deg = 1; //quantité de points de vie enlevés grâce à l'attaque à chaque monstre touché.
+			int deg = 1; //quantitÃ© de points de vie enlevÃ©s grÃ¢ce Ã  l'attaque Ã  chaque monstre touchÃ©.
 			for (int i=-portee ; i<=portee ; i++){
-				for (int j=-portee ; i<=portee ; i++) {
-					for (int e = 1 ; e<ArrayE.size() ; ){ //on démarre au 2e terme pour ne pas avoir l'avatar
+				for (int j=-portee ; j<=portee ; j++) {	
+					for (int e = 1 ; e<ArrayE.size() ; e++){ //on dÃ©marre au 2e terme pour ne pas avoir l'avatar	
 						if (this.getX()+i == ArrayE.get(e).getX() && this.getY()+j == ArrayE.get(e).getY()){
-							ArrayE.get(e).setPDV(ArrayE.get(e).getPDV()-deg);
-						}
+							ArrayE.get(e).setPDV(ArrayE.get(e).getPDV()-deg);							
+							System.out.println("Vie de " + ArrayE.get(e).getJ() + " :" + ArrayE.get(e).getPDV());
+						}						
 					}
 				}
 			}
+			System.out.println("Votre vie : " + this.getPDV());
 		}
-		else if (S.equals('E')) { //Degâts et contrôle du monstre sur lequel le héros va (manque le contrôle pour le moment)
+		else if (S.equals("E")) { //DegÃ¢ts et contrÃ´le du monstre sur lequel le hÃ©ros va 
 			int portee = 1;
 			int deg = 1; 
 			for (int i=-portee ; i<=portee ; i++){
-				for (int j=-portee ; i<=portee ; i++) {
-					for (int e = 1 ; e<ArrayE.size() ; ){ //on démarre au 2e terme pour ne pas avoir l'avatar
+				for (int j=-portee ; j<=portee ; j++) {
+					for (int e = 1 ; e<ArrayE.size() ; e++){ //on dÃ©marre au 2e terme pour ne pas avoir l'avatar
 						if (this.getX()+i == ArrayE.get(e).getX() && this.getY()+j == ArrayE.get(e).getY()){
 							ArrayE.get(e).setPDV(ArrayE.get(e).getPDV()-deg);
 							this.setPDV(this.getPDV()-deg);
-						}
+							ArrayE.get(e).setDeplacementpossible(getDeplacementpossible() + 1);							
+							System.out.println("Vie de " + ArrayE.get(e).getJ() + " :" + ArrayE.get(e).getPDV());
+						}						
 					}
 				}
+				System.out.println("Votre vie : " + this.getPDV());
 			}
-		}
-	} //Pour le contrôle, il faut ajouter une caractéristique deplacementPossible aux monstres. Elle serait égale au nombre de tours nécessaires avant de pouvoir bouger.
-	
+		} 
+	}
+
+	@Override
+	String deplacementInt(int[][] Lab, Avatar A) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
